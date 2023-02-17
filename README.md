@@ -6,7 +6,7 @@
 
 3. git checkout -b 브랜치이름 (Ex. git checkout -b jehyuk)
 
-4. 본인 브랜치 확인 : git branch 색 들어온 곳(main or master 사용 금지, 반드시 본인 branch 에서 작업)
+4. 본인 브랜치 확인 : git branch (main or master 사용 금지, 반드시 본인 branch 에서 작업)
 
 5. 개인 작업
 
