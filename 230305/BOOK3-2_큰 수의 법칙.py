@@ -9,5 +9,27 @@
 
 import sys
 n, m, k = map(int, sys.stdin.readline().split())
-nums = list(int, sys.stdin.readline().split())
+nums = list(map(int, sys.stdin.readline().split()))
+
+# 풀이
+# 포인트: 제일 큰 수 찾기, 두번째로 큰 수 찾기
+# 배열에서 제일 큰 애를 계속 더한다.
+# 이 때, k번 더했으면 k+1번째에서는 두 번째로 큰 애를 더한다.
+# 반복한다.
+largest = max(nums)
+nums.remove(largest)
+second_largest = max(nums)
+
+sum = 0
+times = 0
+while times < m:
+    times += 1
+    sum += largest
+    if times > k:
+        sum -= largest
+        sum += second_largest
+        m -= times
+        times = 0
+print(sum)
+
 
