@@ -3,8 +3,8 @@
 # 입력으로 주어진 숫자 N개의 합을 출력한다.
 
 number_of_numbers = int(input())
-numbers = list(input())
-sum = 0
-for number in numbers:
-    sum += int(number)
-print(sum)
+strs = list(input())
+nums = [int(x) for x in strs]
+print(sum(nums))
+
+# 질문: 테스트는 통과하는데 첫째 줄에서 입력 받는 숫자의 개수는 의미가 없어 보이는데?
