@@ -7,10 +7,20 @@
 # 둘째 줄부터 N개의 줄에 걸쳐 각 카드에 적힌 숫자가 주어진다. 각 숫자는 1~10000의 자연수
 # 첫째 줄에 게임의 룰에 맞게 선택한 카드에 적힌 숫자를 출력한다.
 
+
+import sys
+
+square = []
+n, m = map(int, sys.stdin.readline().split())
+for i in range(n):
+    square.append(list(map(int, sys.stdin.readline().split())))
+
+print(square)
 # 풀이
 # 각 행에서 가장 작은 수를 뽑는다.
 # 각 행의 가장 작은 수들을 비교하여 가장 큰 수를 뽑는다.
 # 가장 큰 수가 포함된 행을 구한다.
-
-import sys
-n, m = map(int, sys.stdin.readline().split())
+min_list = []
+for row in square:
+    min_list.append(min(row))
+print(max(min_list))
