@@ -11,25 +11,38 @@ import sys
 n, m, k = map(int, sys.stdin.readline().split())
 nums = list(map(int, sys.stdin.readline().split()))
 
-# 풀이
-# 포인트: 제일 큰 수 찾기, 두번째로 큰 수 찾기
-# 배열에서 제일 큰 애를 계속 더한다.
-# 이 때, k번 더했으면 k+1번째에서는 두 번째로 큰 애를 더한다.
-# 반복한다.
 largest = max(nums)
 nums.remove(largest)
 second_largest = max(nums)
 
+
+# 풀이 1
+# 가장 큰 수와 두번째로 큰 수의 차이를 구하기(diff)
+# 두번째로 큰 수가 들어가는 횟수 구하기(M // K)
+# 가장 큰 수 X M에서 diff X M // K
+print('first')
+diff = largest - second_largest
+second_times = m // (k+1)
+print((largest * m) - (diff * second_times))
+
+
+# 풀이 2
+# 포인트: 제일 큰 수 찾기, 두번째로 큰 수 찾기
+# 배열에서 제일 큰 수를 계속 더한다.
+# 이 때, k번 더했으면 k+1번째에서는 두 번째로 큰 수를 더한다.
+# 반복한다.
+print('second')
 sum = 0
 times = 0
 while times < m:
     times += 1
-    sum += largest
     if times > k:
-        sum -= largest
         sum += second_largest
         m -= times
         times = 0
+    else:
+        sum += largest
 print(sum)
 
 
+# 모범답안
