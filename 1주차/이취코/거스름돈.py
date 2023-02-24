@@ -1,6 +1,0 @@
-money = int(input())
-a = int(money / 500)
-b = int((money - (a*500)) /100)
-c = int((money - (a*500) - (b*100))/50)
-d = int((money - (a*500) - (b*100) - (c*50)) / 10)
-print(a+b+c+d)
