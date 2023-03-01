@@ -24,3 +24,24 @@ min_list = []
 for row in square:
     min_list.append(min(row))
 print(max(min_list))
+
+# 모범답안 - min 함수 이용
+n, m = map(int, input().split())
+result = 0
+for i in range(n):
+    data = list(map(int, input().split()))
+    min_value = min(data)
+    result = max(result, min_value)
+print(result)
+
+# 모범답안 - 반복문 구조 이용
+result = 0
+for i in range(n):
+    data = list(map(int, input().split()))
+    min_value = 10001 # n, m이 10000 이하이므로....
+    for a in data:
+        min_value = min(min_value, a)
+    result = max(result, min_value)
+print(result)
+
+# 데이터를 입력 받자마자 처리하면 유리한 점이 있나?

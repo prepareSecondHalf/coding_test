@@ -11,6 +11,7 @@ import sys
 n, m, k = map(int, sys.stdin.readline().split())
 nums = list(map(int, sys.stdin.readline().split()))
 
+# 포인트: 제일 큰 수 찾기, 두번째로 큰 수 찾기
 largest = max(nums)
 nums.remove(largest)
 second_largest = max(nums)
@@ -19,7 +20,8 @@ second_largest = max(nums)
 # 풀이 1
 # 가장 큰 수와 두번째로 큰 수의 차이를 구하기(diff)
 # 두번째로 큰 수가 들어가는 횟수 구하기(M // K)
-# 가장 큰 수 X M에서 diff X M // K
+# 가장 큰 수 * M에서 diff * M // K
+# 장점: 두 번째로 큰 수가 들어가는 횟수만 알면 어느 타이밍에 들어가는지 신경 쓸 필요가 없다.
 print('first')
 diff = largest - second_largest
 second_times = m // (k+1)
@@ -27,10 +29,9 @@ print((largest * m) - (diff * second_times))
 
 
 # 풀이 2
-# 포인트: 제일 큰 수 찾기, 두번째로 큰 수 찾기
 # 배열에서 제일 큰 수를 계속 더한다.
 # 이 때, k번 더했으면 k+1번째에서는 두 번째로 큰 수를 더한다.
-# 반복한다.
+# 반복한다. => 시간 초과 우려
 print('second')
 sum = 0
 times = 0
@@ -45,4 +46,38 @@ while times < m:
 print(sum)
 
 
-# 모범답안
+# 답안 예시
+# 제일 큰 수와 두 번째로 큰 수는 sort를 쓰면 간단하게 찾을 수 있단다.
+n, m, k = map(int, input().split())
+data = list(map(int, input().split()))
+data.sort() # 오름차순으로 정렬
+first = data[n-1]
+second = data[n-2]
+
+# 모범 답안 예시
+# 수열(가장 큰 수 k회 + 두 번째로 큰 수 1회)이 반복되는 횟수(m으로 나눈 몫)
+# 가장 큰 수를 더하는 횟수 = ↑ * k회
+# 두 번째로 큰 수를 더하는 횟수 = m - ↑회
+print('book first')
+count = int(m/(k+1)) * k
+count += m % (k+1)
+result = 0
+result += count * first
+result += (m - count) * second
+
+# 단순 답안 예시 => 시간 초과 우려
+# 풀이 2와 비교했을 때, 더한 횟수를 굳이 카운트하지 않아도 총 더한 횟수에서 1씩 빼 나가면 된다.
+print('book second')
+result = 0
+while True:
+    for i in range(k):
+        if m == 0:
+            break
+        result += first
+        m -= 1
+    if m == 0:
+        break
+    result += second
+    m -= 1
+print(result)
+
