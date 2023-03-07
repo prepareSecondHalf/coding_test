@@ -11,6 +11,7 @@
 
 # 풀이: A를 재배열한 결과를 구하는게 아니고... 최솟값을 구하면 됨
 # 곱셈의 결과값을 줄이려면 작은수 x 큰수를 많이 만들어야 하므로 min(A) * max(B) 하면 될 듯
+# 시간 복잡도는 n
 import sys
 n = int(sys.stdin.readline())
 a = list(map(int, sys.stdin.readline().split()))

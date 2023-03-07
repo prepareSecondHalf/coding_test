@@ -13,6 +13,7 @@ expression = sys.stdin.readline().strip()
 # A - B + C => A - (B + C) => 결과가 작아지므로 o
 # A - B - C => A - (B - C) => 결과가 커지므로 x => A - B - C
 # 즉 -를 기준으로 식을 split하고, 각각의 식(+)을 계산 => 빼면 됨
+# 시간 복잡도는 n
 splitted = expression.split('-')
 result = 0
 for idx, val in enumerate(splitted):
