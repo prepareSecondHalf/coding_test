@@ -14,3 +14,5 @@ n = int(sys.stdin.readline())
 meetings = []
 for i in range(n):
     meetings.append(list(map(int, sys.stdin.readline().split())))
+
+# 너도 정렬하면 잘 될지도?
