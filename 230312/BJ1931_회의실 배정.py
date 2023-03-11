@@ -15,4 +15,24 @@ meetings = []
 for i in range(n):
     meetings.append(list(map(int, sys.stdin.readline().split())))
 
-# 너도 정렬하면 잘 될지도?
+# 풀이: 정렬 후 앞 친구부터 투입 > 뒤 친구의 시작 시간을 포함해버리는 경우라면 continue
+print(meetings)
+meetings.sort()
+print(meetings)
+
+idx = 0
+while True:
+    print('index: ', idx)
+    print('current meetings', meetings)
+    if idx == len(meetings) - 1:
+        break
+    if meetings[idx][1] > meetings[idx+1][1]:
+        meetings.remove(meetings[idx])
+        continue
+    else:
+        if meetings[idx][1] > meetings[idx+1][0]:
+            meetings.remove(meetings[idx+1])
+            continue
+        else:
+            idx += 1
+print(len(meetings))
