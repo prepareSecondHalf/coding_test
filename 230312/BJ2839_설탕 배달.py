@@ -9,12 +9,6 @@
 import sys
 n = int(sys.stdin.readline().strip())
 
-<<<<<<< HEAD
-# 풀이: 5kg을 최대한 많이 넣으면 된다. 
-# n을 5kg으로 나누고 나머지가 있으면 3kg으로 나누면 된다. 나누어 떨어질떄까지...
-bags = n // 5
-remains = n % 5
-=======
 # 풀이: 5kg로 최대한 나누고 안되면 3kg
 bags = n // 5
 remains = n % 5
@@ -29,4 +23,3 @@ while True:
         bags -= 1
         remains += 5
 print(bags)
->>>>>>> 158130e087b1a0e8dc9e01528a163c7a67a14dad
