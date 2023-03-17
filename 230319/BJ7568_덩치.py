@@ -22,5 +22,11 @@ people = []
 for person in range(n):
     x, y = list(map(int, sys.stdin.readline().split()))
     people.append([x, y])
-sorted_people = sorted(people, key=lambda person: (-person[0], -person[1]))
-print('sorted', sorted_people)
+
+# n, x, y가 작으므로 n^2 가능
+
+comparison = [0, 0]
+rank = []
+# for idx, person in enumerate(people):
+#     if person[0] > comparison[0] and person[1] > comparison[1]:
+#         comparison = person
