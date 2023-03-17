@@ -15,15 +15,22 @@ number_of_cases = int(sys.stdin.readline().strip())
 for case in range(number_of_cases):
     n, m = map(int, sys.stdin.readline().split())
     priorities = list(map(int, sys.stdin.readline().split()))
-    where = m
+    current_sequnence_of_target = m
     # 풀이
     # 1. 중요도가 높은 것
     # 2. 중요도가 같다면 원래 순서대로
     # 이지만 구할 때는 원래 순서를 먼저 구해야 한다. 중요도가 높은 것은 정렬만 하면 되기 때문...
-    # 즉, 중요도가 동일한 애들 중에서 몇 번째인지 구하고
+    # 즉, 중요도가 동일한 애들이 둘 이상이라면 그 중에서 몇 번째인지 구하고
     # 중요도순으로 정렬해서 중요도가 더 높은 애들을 +하면 된다.
     target = priorities[m]
-    for index, priority in enumerate(priorities):
-        if priority == target and index < m:
-            where += 1
-    print('where are you?: ', sorted(priorities).index(target) + where)
+    print('target', target, 'current_sequnence_of_target', current_sequnence_of_target)
+    sequence_in_same = 0
+    if priorities.count(target) > 1:
+        for index, priority in enumerate(priorities):
+            print('index', index, 'priority', priority)
+            if priority == target and index < m:
+                sequence_in_same += 1
+                print('sequence_in_same', sequence_in_same)
+
+    current_sequnence_of_target = sorted(priorities).index(target) + sequence_in_same
+    print('where are you?: ', current_sequnence_of_target)
