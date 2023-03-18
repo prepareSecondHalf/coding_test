@@ -64,7 +64,7 @@ def solution(food_times, k):
 				# q 변수에 (음식 시간, 음식 번호)을 저장한다.
         heapq.heappush(q, (food_times[i], i + 1))
     
-		# 먹기 위해 사용한 시간    
+		# 먹기 위해 사용한 시간
     sum_value = 0
 		# 직전에 다 먹은 음식 시간
     previous = 0
