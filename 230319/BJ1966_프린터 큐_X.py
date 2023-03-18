@@ -10,43 +10,29 @@
 
 # 각 테스트 케이스에 대해 문서가 몇 번째로 인쇄되는지 출력한다.
 
+from collections import deque
 import sys
 number_of_cases = int(sys.stdin.readline().strip())
 
 for case in range(number_of_cases):
     n, m = map(int, sys.stdin.readline().split())
-    priorities = list(map(int, sys.stdin.readline().split()))
+    priorities = deque(list(map(int, sys.stdin.readline().split())))
     # 풀이
     # 문서의 개수가 적으므로 n^2도 가능하다.
-    # 시키는대로 하기
-    will_be_printed = priorities.copy()
+    # 시키는대로 하기 => 실패
+
+    # 인터넷 참고 풀이: deque(양방향 큐)를 사용해서 시키는대로 하면 됨
+    indexes = deque(list(range(n)))
     printed = 0
-    target = priorities[m]
-    idx = 0
-    while True:
-        # 제일 큰 놈이 제일 먼저 인쇄됨
-        fastest = max(will_be_printed)
-        print('current idx', idx)
-        print('fastest', fastest)
-        print('priorities[idx]', priorities[idx])
-        if priorities[idx] == fastest:
-            # 현재 체크 중인 친구가 최우선 순위일 때 => 인쇄함
+
+    while priorities:
+        if priorities[0] == max(priorities):
             printed += 1
-            if idx != m:
-                # 인쇄한 친구가 m이 아니라면 그냥 타겟에서 제거만 함
-                # 타겟이 하나 줄어들기 때문에 idx 그대로, m은 -1
-                will_be_printed.remove(priorities[idx])
-                m -= 1
-            else:
-                # 인쇄한 친구가 m이면 escape
-                print('fastest', fastest)
-                print('target', target)
-                if fastest == target:
-                    break
+            priorities.popleft()
+            if indexes.popleft() == m:
+                print(printed)
         else:
-            # 거 아니면 될때까지 반복하십시오
-            if idx == len(will_be_printed):
-                idx = 0
-            else:
-                idx += 1
-    print('the answer', printed)
+            priorities.append(priorities.popleft())
+            indexes.append(indexes.popleft())
+
+

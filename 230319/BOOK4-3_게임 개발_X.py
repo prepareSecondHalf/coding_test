@@ -44,10 +44,10 @@ def get_next(curr_d, curr_x, curr_y):
   elif curr_d == -3:
     return curr_x + 1, curr_y
 
-candidates = []
 can_progress = True
 curr_x, curr_y = a, b
 curr_d = d
+conquered = 0
 while can_progress:
   # step1 방향 전환
   curr_d -= 1
@@ -57,6 +57,7 @@ while can_progress:
   if next_target == 0:
     # step2-1. 0이면 진행(원래 있던 자리를 -1로 변경하고 현재 위치를 target으로 변경)
     map_data[get_next(curr_d, curr_x, curr_y)[0]][get_next(curr_d, curr_x, curr_y)[1]] = -1
+    conquered += 1
     curr_x, curr_y = get_next(curr_d, curr_x, curr_y)
   else:
     # step2-2. 1 or -1이면 step1으로 돌아감
@@ -66,7 +67,60 @@ while can_progress:
       curr_d = prev_d
       curr_x, curr_y = prev_positions[-1][0], prev_positions[-1][1]
       prev_positions.pop()
-      # 추가로, 해당 방향으로는 가면 안 되므로 해당 방향 1로 변경?????? 모르겠다...
+      # 다시 읽어보니, 뒤로 간다고 안 간 걸로 되는 것은 아니다.
     continue
+print(conquered)
 
-  print(*map_data, sep='\n')
+
+# 모범 답안
+n, m = map(int, sys.stdin.readline().split())
+d = [[0] * m for _ in range(n)]
+x, y, direction = map(int, sys.stdin.readline().split())
+d[x][y] = 1 # 현 좌표 방문
+
+array = []
+for i in range(n):
+  array.append(list(map(int, sys.stdin.readline().split())))
+
+# 동서남북
+dx = [-1, 0, 1, 0]
+dy = [0, 1, 0, -1]
+
+# 왼쪽 회전
+def turn_left():
+  global direction
+  direction -= 1
+  if direction == -1:
+    direction = 3
+
+# 이동 시작
+count = 1
+turn_time = 0
+while True:
+  turn_left()
+  nx = x + dx[direction]
+  ny = y + dy[direction]
+  # 회전 후, 정면에 가 보지 않은 칸이 존재하는 경우 => 이동
+  if d[nx][ny] == 0 and array[nx][ny] == 0:
+    d[nx][ny] = 1
+    x = nx
+    y = ny
+    count += 1
+    turn_time = 0
+    continue
+  else:
+    # 회전 후, 정면에 가 보지 않은 칸이 없거나 바다인 경우 => 다시 회전
+    turn_time += 1
+  if turn_time == 4:
+    # 네 방향 모두 가 봤거나 바다인 경우
+    nx = x - dx[direction]
+    ny = y - dy[direction]
+    # 뒤로 갈 수 있으면 뒤로 이동
+    if array[nx][ny] == 0:
+      x = nx
+      y = ny
+    # 뒤가 바다인 경우
+    else:
+      break
+    turn_time = 0
+print(count)

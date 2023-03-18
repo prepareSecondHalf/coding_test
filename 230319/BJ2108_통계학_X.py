@@ -22,20 +22,22 @@ for i in range(n):
 # 1. 산술평균
 print('the answer')
 avg = sum(integers) / n
-print(round(avg))
+print(round(avg + 0.00001))
 # 2. 중앙값 => 어차피 중앙이므로 내림차순/오름차순은 의미 x
 center = sorted(integers)[len(integers) // 2]
 print(center)
 # 3. 최빈값 => set으로 중복 제거 => 중복 제거된 애들로 각각 count => 를 하려고 했는데 이 경우 최빈값이 중복인 경우 대응하지 못한다.
 # 는 그냥 배열에 넣고 길이가 2 이상이면 정렬 후 두 번째로 작은 값
-# 시간초과 ㅜ
+# 시간초과 > 다들 for문 두 번씩 잘만 쓰는데 왜 난 시간 초과되지???
 not_duplicated_integers = list(set(integers))
 most_frequent_number = 0
 most_frequently_counted = 0
 most_frequent_numbers = []
 for integer in not_duplicated_integers:
-    if most_frequently_counted <= integers.count(integer):
+    if most_frequently_counted < integers.count(integer):
         most_frequently_counted = integers.count(integer)
+for integer in not_duplicated_integers:
+    if most_frequently_counted == integers.count(integer):
         most_frequent_numbers.append(integer)
 if len(most_frequent_numbers) == 1:
     most_frequent_number = most_frequent_numbers[0]
