@@ -29,6 +29,7 @@ print(center)
 # 3. 최빈값 => set으로 중복 제거 => 중복 제거된 애들로 각각 count => 를 하려고 했는데 이 경우 최빈값이 중복인 경우 대응하지 못한다.
 # 는 그냥 배열에 넣고 길이가 2 이상이면 정렬 후 두 번째로 작은 값
 # 시간초과 > 다들 for문 두 번씩 잘만 쓰는데 왜 난 시간 초과되지???
+# for문이 문제가 아니고 counter 라이브러리를 쓰지 않으면 안된다고 한다!
 not_duplicated_integers = list(set(integers))
 most_frequent_number = 0
 most_frequently_counted = 0
