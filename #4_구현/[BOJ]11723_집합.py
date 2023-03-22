@@ -36,3 +36,39 @@ for i in range(m):
     s = set([i for i in range(1, 21)])
     
 print(s)
+
+'''두번째 시도'''
+import sys
+
+m = int(sys.stdin.readline().strip())
+s = set()
+
+for i in range(m):
+  input = list(sys.stdin.readline().split(' '))
+  input[0] = input[0].strip()
+  if (input[0] != 'all' and input[0] != 'empty'):
+    input[1] = int(input[1])
+
+  if (input[0] == 'add'):
+    if ((input[1] in s) == False and input[1] >= 1 and input[1] <= 20):
+      s.add(input[1])
+  elif (input[0] == 'check'):
+    if (input[0] == 'check' and (input[1] in s) == True and input[1] >= 1
+        and input[1] <= 20):
+      print(1)
+    else:
+      print(0)
+  elif (input[0] == 'remove'):
+    if (input[0] == 'remove' and (input[1] in s) == True and input[1] >= 1
+        and input[1] <= 20):
+      s.remove(input[1])
+  elif (input[0] == 'toggle'):
+    if (input[0] == 'toggle' and (input[1] in s) == True and input[1] >= 1
+        and input[1] <= 20):
+      s.remove(input[1])
+    else:
+      s.add(input[1])
+  elif (input[0] == 'empty'):
+    s.clear()
+  elif (input[0] == 'all'):
+    s = set(list([i for i in range(1, 21)]))
