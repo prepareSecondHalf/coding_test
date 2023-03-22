@@ -42,6 +42,7 @@ while True:
 
     x, y = nx, ny
     snakes.append((x, y))
+    arr[x][y] = 1
 
     if arr[x][y] == 0:
         tail = snakes.popleft()
