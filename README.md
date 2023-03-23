@@ -1,3 +1,12 @@
+# 백준 티어(심심한 분들은 ㅎ...)
+
+### 윤제혁
+
+[![Solved.ac
+Profile](http://mazassumnida.wtf/api/v2/generate_badge?boj=quftld3)](https://solved.ac/quftld3/)
+
+[solved.ac](https://solved.ac/profile/quftld3) 
+
 # git 기본 사용법
 
 1. 본인 컴퓨터에 작업할 폴더 하나 만들어 주시고 터미널에서 cd명령어(change directory) 를 사용해 해당 폴더로 이동 (Ex. C://Users -> C://Users/repo/test 이면 cd repo/test)
@@ -17,13 +26,3 @@
 8. git push origin 브랜치이름 (Ex. git push origin jehyuk)
 
 9. 이후 5~8 반복
-
-
-# 백준 티어
-
-### 윤제혁
-
-[![Solved.ac
-Profile](http://mazassumnida.wtf/api/v2/generate_badge?boj=quftld3)](https://solved.ac/quftld3/)
-
-[solved.ac](https://solved.ac/profile/quftld3) 
