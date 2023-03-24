@@ -23,34 +23,35 @@ def solution(s):
     min_length = 1000
     # 단위가 전체 길이의 절반이 넘어가면 압축이 되지 않으므로 단위는 최대 '전체 길이 // 2'
     units = list(range(1, len(s)//2+1))
-    print('units', units)
     for unit in units:
         repeated = s[:unit]
-        print('repeated', repeated)
         compressed_time = 0
         compressed_s = ''
         idx = 0
         while True:
-            if (idx+1)*unit-1 >= len(s):
-                print('compressed_s', compressed_s)
+            target_idx = (idx+1)*unit-1
+            if target_idx >= len(s):
                 break
-
-            compared = s[idx*unit:(idx+1)*unit-1]
-            print('compared', compared)
+            compared = s[idx*unit:target_idx+1]
             if repeated == compared:
                 compressed_time += 1
             else:
                 if compressed_time > 1:
                     compressed_s += str(compressed_time) + repeated
+                elif compressed_time == 1:
+                    compressed_s += repeated
                 else:
                     compressed_s += compared
                 compressed_time = 0
             idx += 1
+        if min_length > len(compressed_s):
+            min_length = len(compressed_s)
 
-
-
-
-
+    answer = min_length
     return answer
 
 solution('abababababaaaaa')
+
+
+
+# 모범답안
