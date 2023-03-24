@@ -20,6 +20,12 @@ def solution(key, lock):
     print(*key, sep='\n')
     print(*lock, sep='\n')
 
+    # 오른쪽 90도 회전
+
+    # 이동
+
+    # 판별
+
     return answer
 
 solution([[0, 0, 0], [1, 0, 0], [0, 1, 1]], [[1, 1, 1], [1, 1, 0], [1, 0, 1]])
