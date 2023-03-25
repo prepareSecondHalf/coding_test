@@ -1,64 +1,88 @@
-# arr[x][y]케이스
-# 0 : 아무것도 없음
-# 1 : 뱀이 자리함
-# 2 : 사과가 자리함
-# 틀렸는데 더 놀기는 눈치보임
 import sys
 from collections import deque
 
-N = int(sys.stdin.readline())
-K = int(sys.stdin.readline())
+def changeDir(cur, dir): # 방향 전환
+    if dir == 'r':
+        if cur == 3:
+            return 1
+        elif cur == 2:
+            return 0
+        elif cur == 1:
+            return 2
+        else:
+            return 3
+    else:
+        if cur == 3:
+            return 0
+        elif cur == 2:
+            return 1
+        elif cur == 1:
+            return 3
+        else:
+            return 2
 
-arr = [[0] * N for _ in range(N)]
+N = int(sys.stdin.readline()) # 보드 크기
+K = int(sys.stdin.readline()) # 사과 개수
 
-for i in range(K):
-    x, y = map(int, sys.stdin.readline().strip().split())
-    arr[x][y] = 2
+map = [[0] * (N + 1) for _ in range(N + 1)] # 맵
 
-L = int(sys.stdin.readline())
+for _ in range(K):
+    x, y = sys.stdin.readline().strip().split()
+    map[int(x)][int(y)] = 2 # 사과 위치 = 2
+    
+L = int(sys.stdin.readline()) # 뱀의 방향 변환 횟수
+change_dir = [] # 뱀의 방향 변환 저장할 배열
 
-change_dir_list = deque([])
-for i in range(L):
-    time, dir = sys.stdin.readline().strip().split()
-    change_dir_list.append((int(time), dir))
+for _ in range(L):
+    x, c = sys.stdin.readline().strip().split()
+    change_dir.append((x, c))
 
-snakes = deque([(0, 0)])
-time, x, y = 0, 0, 0
-dir = 1
-arr[0][0] = 1
+sec = 0 # 시간
 
-dx = [0, 1, 0, -1]
-dy = [-1, 0, 1, 0]
+snake_info = deque([])
+snake_info.append((1, 1))
+
+x, y = 1, 1 # 머리 위치
+map[1][1] = 1 # 뱀 위치 = 1
+
+snake_dir = 3 # 뱀의 머리가 현재 바라보는 방향 # default 오른쪽
+
+dir = [(-1, 0), (1, 0), (0, -1), (0, 1)] # 상하좌우
 
 while True:
-    time += 1
+    sec += 1 # 1초 증가
     
-    nx = x + dx[dir]
-    ny = y + dy[dir]
-
-    if nx < 0 or ny < 0 or nx >= N or ny >= N or arr[nx][ny] == 1:
-        print(time)
+    # 머리 이동 전 체크
+    dx = x + dir[snake_dir][0]
+    dy = y + dir[snake_dir][1]
+    
+    # 벽에 닿았거나 본인의 몸과 부딪히면 종료
+    if dx > N or dy > N or dx < 1 or dy < 1 or map[dx][dy] == 1:
         break
+    
+    # 꼬리 이동
+    # 머리가 사과를 안먹었을 경우
+    if map[dx][dy] != 2:
+        tail = snake_info.popleft()
+        t_x = tail[0]
+        t_y = tail[1]
 
-    x, y = nx, ny
-    snakes.append((x, y))
-    arr[x][y] = 1
+        map[t_x][t_y] = 0
 
-    if arr[x][y] == 0:
-        tail = snakes.popleft()
-        arr[tail[0]][tail[1]] = 0
+    # 머리 이동
+    map[dx][dy] = 1
+    x, y = dx, dy
+    # 뱀 위치 정보 갱신
+    snake_info.append((dx, dy))
+    
+    # 뱀의 이동 경로가 바뀌었을 경우
+    if len(change_dir) > 0 and sec == int(change_dir[0][0]):
+        # 오른쪽으로 90도
+        if change_dir[0][1] == 'D':
+            snake_dir = changeDir(snake_dir, 'r')
+        else: # 왼쪽으로 90도
+            snake_dir = changeDir(snake_dir, 'l')
 
-    if len(change_dir_list) > 0 and change_dir_list[0][0] == time:
-        change_dir = change_dir_list[0][1]
-        change_dir_list.popleft()
-
-        if change_dir == 'D':
-            dir += 1
-
-            if dir > 3:
-                dir = 0
-        else:
-            dir -= 1
-
-            if dir < 0:
-                dir = 3
+        change_dir.pop(0)
+                    
+print(sec)
