@@ -14,6 +14,8 @@
 # key와 lock의 원소는 0 또는 1로 이루어져 있습니다.
 # 0은 홈 부분, 1은 돌기 부분을 나타냅니다.
 
+# programmers.co.kr/learn/courses/30/lessons/60059
+
 def solution(key, lock):
     answer = True
 

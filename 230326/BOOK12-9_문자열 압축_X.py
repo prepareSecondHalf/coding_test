@@ -16,6 +16,7 @@
 # 따라서 주어진 문자열("xababcdcdababcdcd")을 x / ababcdcd / ababcdcd 로 자르는 것은 불가능 합니다.
 # 이 경우 어떻게 문자열을 잘라도 압축되지 않으므로 가장 짧은 길이는 17이 됩니다.
 
+# programmers.co.kr/learn/courses/30/lessons/60057
 
 def solution(s):
     answer = 0
@@ -51,7 +52,6 @@ def solution(s):
     return answer
 
 solution('abababababaaaaa')
-
 
 
 # 모범답안
