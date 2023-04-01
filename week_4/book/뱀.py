@@ -72,6 +72,7 @@ while True:
     # 머리 이동
     map[dx][dy] = 1
     x, y = dx, dy
+
     # 뱀 위치 정보 갱신
     snake_info.append((dx, dy))
     
