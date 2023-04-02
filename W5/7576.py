@@ -31,11 +31,11 @@ def bfs():
 
 bfs()
 
-answer = max(map(max, graph)) - 1
-for row in graph:
-    if 0 in row:
-        answer = -1
-print(answer)
+res = max(map(max, graph)) - 1
+for i in graph:
+    if 0 in i:
+        res = -1
+print(res)
 
 # 개선 코드
 import sys
