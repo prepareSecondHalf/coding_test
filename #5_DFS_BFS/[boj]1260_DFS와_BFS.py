@@ -5,11 +5,6 @@
 
   input: 두 정점의 번호
 '''
-# dfs
-
-
-
-
 # bfs
 from collections import deque
 import sys
@@ -26,6 +21,8 @@ for _ in range(m):
 
 print(n, m, b, graph)
 
+
+# dfs
 def dfs(v):
   visit_list[v] = 1
   print(v, end = " ")
