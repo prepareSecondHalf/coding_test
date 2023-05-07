@@ -28,6 +28,8 @@
 # ...
 # index = -1 => 1회 곱하면 됨
 
+# 우선순위 큐 써야 함
+
 import sys
 n = int(sys.stdin.readline())
 card_piles = []

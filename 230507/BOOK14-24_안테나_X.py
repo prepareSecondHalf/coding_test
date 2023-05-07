@@ -19,7 +19,7 @@ n = int(sys.stdin.readline())
 positions = list(map(int, sys.stdin.readline().split()))
 
 # 풀이1: 노가다 => 당연하게도 시간 초과
-# 풀이2: 평균 또는 중간값이 가장 가까울 것인데...확신할 수 있는가
+# 풀이2: 평균 또는 중간값이 가장 가까울 것인데...확신할 수 있는가 => 평균 아니고 그냥 중간값임
 positions.sort()
 print(positions)
 
