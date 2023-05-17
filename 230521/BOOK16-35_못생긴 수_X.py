@@ -27,5 +27,5 @@ while len(ugly_numbers) < n:
         i3 += 1
     if next_ugly == ugly_numbers[i5]*5: 
         i5 += 1
-print(ugly_numbers)
+# print(ugly_numbers)
 print(ugly_numbers[n-1])
