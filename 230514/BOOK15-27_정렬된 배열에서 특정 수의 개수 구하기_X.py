@@ -11,4 +11,4 @@ n, x = map(int, sys.stdin.readline().split())
 numbers = list(map(int, sys.stdin.readline().split()))
 
 # 정렬은 되어 있으므로 바로 binary search를 하되, 연속적으로 나타날 것이므로 첫 번째 위치를 찾는 것과 마지막 위치를 찾는 것을 찾으면 된다.
-
+# bisect lib!!!
