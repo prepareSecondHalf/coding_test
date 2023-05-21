@@ -39,18 +39,20 @@ for i in range(n):
 # 24  30  27  26  24
 # 이런 dp table로 만들어서 마지막 line의 최댓값을 구하는 것...
 
+if n == 1:
+    print(triangles[0][0])
+else:
+    dp = [[0] * n for _ in range(n)]
+    dp[0][0] = triangles[0][0]
+    dp[1][0] = dp[0][0] + triangles[1][0]
+    dp[1][1] = dp[0][0] + triangles[1][1]
+    # print('-----init dp table-----')
+    print(*dp, sep='\n')
 
-dp = [[0] * n for _ in range(n)]
-dp[0][0] = triangles[0][0]
-dp[1][0] = dp[0][0] + triangles[1][0]
-dp[1][1] = dp[0][0] + triangles[1][1]
-# print('-----init dp table-----')
-# print(*dp, sep='\n')
+    for i in range(2, n):
+        for j in range(0, i+1):
+            dp[i][j] = max(dp[i-1][j-1], dp[i-1][j]) + triangles[i][j]
 
-for i in range(2, n):
-    for j in range(0, i+1):
-        dp[i][j] = max(dp[i-1][j-1], dp[i-1][j]) + triangles[i][j]
-
-# print('-----dp table-----')
-# print(*dp, sep='\n')
-print(max(dp[n-1]))
+    # print('-----dp table-----')
+    print(*dp, sep='\n')
+    print(max(dp[n-1]))
