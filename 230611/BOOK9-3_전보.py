@@ -31,8 +31,37 @@ print(*graph, sep='\n')
 # (2, 4)    (3, 2)
 # ()        ()
 # ()        ()
-# 위와 같이 초기화된다. 1에서 2, 1에서 3으로 가는 케이스밖에 없기 때문
+# distance는 
+# [INF, INF, INF, INF]
+# 로 초기화된다. (테스트 케이스에서는 1에서 2, 1에서 3으로 가는 케이스밖에 없다.)
 
+import heapq
+def dijkstra(start):
+    q = []
+    heapq.heappush(q, (0, start)) # 큐에 출발점 push
+    distance[start] = 0 # 출발점에서 자기 자신까지의 거리이므로 0으로 설정
+    while q:
+        dist, now = heapq.heappop(q) # 출발점 기준 0, 1(c)
+        if distance[now] < dist: # 기존 distance(출발점 기준 초기화된 distance, 즉 INF)가 더 작으면 skip하고 그렇지 않으면 최솟값 갱신
+            continue
+        for i in graph[now]: # graph에서 now(출발점 기준 1(c))는 2로 가는 케이스, 3으로 가는 케이스가 있다.
+            cost = dist + i[1] # cost는 now까지 가는 거리(출발점 기준 0) + 2, 3으로 가는 각각의 거리
+            if cost < distance[i[0]]: # 계산한 cost가 각각 2, 3까지의 distance보다 작으면 이를 갱신하고 큐에 다음 출발점을 push
+                distance[i[0]] = cost
+                heapq.heappush(q, (cost, i[0]))
+dijkstra(c)
+print(distance)
+# 이렇게 하면 distance 배열이 아래와 같이 완성된다.
+# [0, 4, 2]
+
+# 1. 메시지를 받는 총 도시의 수는 distance의 길이에서 INF(도달 불가) 또는 0(자기 자신)이 아닌 값들의 수
+# 2. 걸리는 총 시간은 가장 큰 값(가장 멀리 있는 도시)
+# distance에서 0과 INF를 제거한 뒤에 길이를 구하면 총 도시의 수, 그 중 가장 큰 수를 구하면 걸리는 총 시간이 나온다.
+remove_set = { 0, INF }
+distance = [dist for dist in distance if dist not in remove_set]
+print(distance)
+
+print(len(distance), max(distance))
 
 # TEST CASE
 # 3 2 1
