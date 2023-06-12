@@ -49,9 +49,17 @@ for i in range(m):
     a, b, c = map(int, sys.stdin.readline().split())
     table[a][b] = min(table[a][b], c)
 
+# a => k => b 순으로, k를 거쳐 a에서 b로 가는 경우의 cost 입력
 for k in range(1, n+1):
     for a in range(1, n+1):
         for b in range(1, n+1):
             table[a][b] = min(table[a][b], table[a][k] + table[k][b])
+
+# 다 했는데 아직도 INF인 애가 있으면 0으로 변경(a => b로 도달하는 루트가 없는 경우)
+for i in range(1, n+1):
+    for j in range(1, n+1):
+        if table[i][j] == INF: table[i][j] = 0
+
+# 출력
 for i in range(1, n+1):
     print(*table[i][1:], sep=" ")
