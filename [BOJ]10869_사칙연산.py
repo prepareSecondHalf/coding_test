@@ -1,8 +1,0 @@
-n = input().split(' ')
-n1 = int(n[0])
-n2 = int(n[1])
-print(n1 + n2)
-print(n1 - n2)
-print(n1 * n2)
-print(int(n1 / n2))
-print((n1 % n2))
